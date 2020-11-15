@@ -1,18 +1,17 @@
 plugins {
 	id "java";
-	id "maven-publish";
 }
-
-ext.moduleName = "jp.empressia.template";
+ext.moduleName = "jp.empressia.vscode_java_test_01";
 ext.junitVersion = "5.7.0";
 ext.hamcrestVersion = "2.2";
 
 repositories {
 	jcenter();
-	maven { url(repository_url); }
 }
 
 dependencies {
+	implementation(group:"org.ainslec", name:"picocog", version:"1.0.6");
+
 	// use JUnit test framework.
 	testImplementation(group:"org.junit.jupiter", name:"junit-jupiter-api", version:junitVersion);
 	testRuntimeOnly(group:"org.junit.jupiter", name:"junit-jupiter-engine", version:junitVersion);
@@ -25,6 +24,7 @@ tasks.withType(JavaCompile) {
 }
 
 java {
+	modularity.inferModulePath = true;
 	withJavadocJar();
 	withSourcesJar();
 }
@@ -41,21 +41,4 @@ javadoc {
 
 test {
 	useJUnitPlatform();
-}
-
-publishing {
-	publications {
-		maven(MavenPublication) {
-			groupId = "jp.empressia";
-			artifactId = moduleName;
-			artifact jar;
-			artifact javadocJar;
-			artifact sourcesJar;
-		}
-	}
-	repositories {
-		maven {
-			url = repository_url;
-		}
-	}
 }

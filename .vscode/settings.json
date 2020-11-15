@@ -1,0 +1,9 @@
+{
+	"java.test.config": [
+		{
+			"name": "t",
+			"vmArgs": ["--module-path", "bin/main;module/"],
+		}
+	],
+	"java.test.defaultConfig": "t"
+}
